@@ -21,7 +21,7 @@ export default function Home() {
       {/* 2. CINEMATIC 3D BACKGROUND LAYER (Fixed 63-Frame Scrub Sequencer + 3D Warp Field) */}
       <CinematicBackground
         scrollProgress={scrollProgress}
-        activeLevel={scrollProgress >= 0.7 ? 1 : 0}
+        activeLevel={scrollProgress >= 0.74 ? 1 : 0}
       />
 
       {/* 3. MAIN CINEMATIC SCROLL CONTAINER (The Story -> The Security Protocol & Get Started CTA) */}
@@ -29,7 +29,7 @@ export default function Home() {
         {/* ACT I: THE STORY (Gate -> Office -> Businessman -> Attack -> Secured) */}
         <StorySection
           scrollProgress={scrollProgress}
-          onScrollToProtocol={() => scrollToProgress(0.85)}
+          onScrollToProtocol={() => scrollToProgress(0.88)}
         />
 
         {/* ACT II: THE SECURITY PROTOCOL (Final Section: 4 Battle Levels & Get Started Button) */}

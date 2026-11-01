@@ -98,8 +98,8 @@ export function useLenisScroll(totalHeightMultiplier: number = 6): LenisScrollSt
     window.addEventListener("scroll", handleNativeScroll, { passive: true });
 
     // Inertia physics loop (Lenis formula: y += (target - current) * factor)
-    // Damping factor: 0.09 with delta-time normalization
-    const DAMPING = 0.09;
+    // Damping factor: 0.08 with delta-time normalization (Smoother scroll inertia)
+    const DAMPING = 0.08;
     const TARGET_FPS = 60;
     const FRAME_MS = 1000 / TARGET_FPS;
 

@@ -32,11 +32,11 @@ export default function CyberHUDHeader({
   }, []);
 
   const scrubPercent = Math.min(100, Math.max(0, Math.round(scrollProgress * 100)));
-  const isProtocolPhase = scrollProgress >= 0.7;
+  const isProtocolPhase = scrollProgress >= 0.74;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 py-2.5 pointer-events-auto select-none transition-all">
-      <div className="max-w-7xl mx-auto flex items-center justify-between rounded-xl bg-[#0a0a0c]/85 backdrop-blur-xl border border-white/10 px-4 py-2 shadow-[0_4px_30px_rgba(0,0,0,0.8)]">
+      <div className="max-w-7xl mx-auto flex items-center justify-between rounded-xl bg-[#0a0a0c]/92 backdrop-blur-md border border-white/15 px-4 py-2 shadow-[0_4px_30px_rgba(0,0,0,0.8)]">
         {/* Left: Cyber Command Branding & Clearance */}
         <div className="flex items-center space-x-3">
           <button

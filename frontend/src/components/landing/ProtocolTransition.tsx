@@ -39,15 +39,15 @@ export default function ProtocolTransition() {
           FACILITY INGRESS // DEFENSE GRID
         </span>
 
-        <h2 className="text-4xl sm:text-6xl font-black font-sans tracking-tight text-white uppercase drop-shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+        <h2 className="text-4xl sm:text-6xl font-black font-sans tracking-tight text-white uppercase [text-shadow:0_2px_14px_rgba(0,0,0,0.95)]">
           SECURITY PROTOCOL
         </h2>
 
-        <h3 className="text-2xl sm:text-4xl font-extrabold font-mono tracking-wider text-cyan-400 uppercase drop-shadow-[0_0_20px_rgba(6,182,212,0.6)]">
+        <h3 className="text-2xl sm:text-4xl font-extrabold font-mono tracking-wider text-cyan-400 uppercase [text-shadow:0_0_25px_rgba(6,182,212,0.7),0_2px_8px_rgba(0,0,0,0.9)]">
           4 BATTLE LEVELS
         </h3>
 
-        <p className="text-sm sm:text-base text-zinc-300 font-sans max-w-xl mx-auto pt-1">
+        <p className="text-sm sm:text-base text-zinc-200 font-sans max-w-xl mx-auto pt-1 [text-shadow:0_1px_4px_rgba(0,0,0,0.8)]">
           Test the agent. Break the attack. Prove the defense.
         </p>
       </div>
@@ -55,27 +55,27 @@ export default function ProtocolTransition() {
       {/* 4 Tactical Level Display Cards */}
       <div className="relative z-10 mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl w-full">
         {[
-          { id: 1, name: "EMAIL SECURITY", sub: "Real Gmail", color: "border-cyan-500/60 text-cyan-400 bg-[#0a0a0c]/85 shadow-[0_0_25px_rgba(6,182,212,0.2)]" },
-          { id: 2, name: "FILE SECURITY", sub: "Simulated Documents", color: "border-purple-500/60 text-purple-400 bg-[#0a0a0c]/85 shadow-[0_0_25px_rgba(168,85,247,0.2)]" },
-          { id: 3, name: "BROWSER SECURITY", sub: "Simulated Web", color: "border-amber-500/60 text-amber-400 bg-[#0a0a0c]/85 shadow-[0_0_25px_rgba(245,158,11,0.2)]" },
-          { id: 4, name: "FINANCIAL SECURITY", sub: "Mock Payments", color: "border-red-500/60 text-red-400 bg-[#0a0a0c]/85 shadow-[0_0_25px_rgba(239,68,68,0.2)]" },
+          { id: 1, name: "EMAIL SECURITY", sub: "Real Gmail", color: "border-cyan-500/70 text-cyan-400 bg-[#0a0f1d]/90 shadow-[0_0_20px_rgba(6,182,212,0.18)]" },
+          { id: 2, name: "FILE SECURITY", sub: "Simulated Documents", color: "border-purple-500/70 text-purple-400 bg-[#0a0f1d]/90 shadow-[0_0_20px_rgba(168,85,247,0.18)]" },
+          { id: 3, name: "BROWSER SECURITY", sub: "Simulated Web", color: "border-amber-500/70 text-amber-400 bg-[#0a0f1d]/90 shadow-[0_0_20px_rgba(245,158,11,0.18)]" },
+          { id: 4, name: "FINANCIAL SECURITY", sub: "Mock Payments", color: "border-red-500/70 text-red-400 bg-[#0a0f1d]/90 shadow-[0_0_20px_rgba(239,68,68,0.18)]" },
         ].map((path) => (
           <div
             key={path.id}
-            className={`p-5 rounded-2xl border backdrop-blur-xl ${path.color} flex flex-col items-center justify-between text-center transition-all duration-300 hover:scale-105`}
+            className={`p-5 rounded-2xl border backdrop-blur-sm ${path.color} flex flex-col items-center justify-between text-center transition-all duration-300 hover:scale-105`}
           >
-            <span className="text-[10px] font-mono text-zinc-400 tracking-widest block uppercase">
+            <span className="text-[10px] font-mono text-zinc-400 tracking-widest block uppercase font-semibold">
               PATHWAY 0{path.id}
             </span>
-            <span className="text-sm sm:text-base font-bold font-sans tracking-tight mt-3 text-white">
+            <span className="text-sm sm:text-base font-bold font-sans tracking-tight mt-3 text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)]">
               {path.name}
             </span>
-            <span className="text-[11px] font-mono text-zinc-400 mt-1.5">
+            <span className="text-[11px] font-mono text-zinc-300 mt-1.5 font-medium">
               {path.sub}
             </span>
-            <div className="mt-4 pt-3 border-t border-white/5 w-full flex items-center justify-center gap-1.5 text-[10px] font-mono text-zinc-500">
+            <div className="mt-4 pt-3 border-t border-white/10 w-full flex items-center justify-center gap-1.5 text-[10px] font-mono text-zinc-400">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span>ACTIVE</span>
+              <span className="font-semibold">ACTIVE</span>
             </div>
           </div>
         ))}
@@ -86,7 +86,7 @@ export default function ProtocolTransition() {
         <button
           type="button"
           onClick={handleGetStartedClick}
-          className={`px-10 py-4 rounded-xl font-mono font-black text-sm uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer border shadow-2xl active:scale-95 ${
+          className={`px-10 py-4 rounded-xl font-mono font-black text-sm uppercase tracking-[0.2em] transition-all duration-300 cursor-pointer border shadow-2xl active:scale-95 [text-shadow:0_1px_2px_rgba(0,0,0,0.7)] ${
             clicked
               ? "bg-emerald-500 text-black border-emerald-300 shadow-[0_0_50px_rgba(16,185,129,0.8)] scale-105"
               : "bg-gradient-to-r from-red-600 via-rose-600 to-red-500 hover:from-red-500 hover:to-rose-500 text-white border-red-400/80 shadow-[0_0_35px_rgba(239,68,68,0.6)] hover:scale-105 hover:shadow-[0_0_50px_rgba(239,68,68,0.8)]"
@@ -94,7 +94,7 @@ export default function ProtocolTransition() {
         >
           {clicked ? "SYSTEM INITIALIZED ✓" : "GET STARTED →"}
         </button>
-        <span className="text-[10px] font-mono text-zinc-500 tracking-wider">
+        <span className="text-[10px] font-mono text-zinc-400 tracking-wider font-semibold">
           ZERO-TRUST SENTINEL READY
         </span>
       </div>

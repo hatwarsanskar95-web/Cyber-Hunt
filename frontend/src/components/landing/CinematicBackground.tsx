@@ -36,8 +36,8 @@ export default function CinematicBackground({ scrollProgress, activeLevel }: Cin
     const particleCanvas = particleCanvasRef.current;
     if (!frameCanvas || !particleCanvas) return;
 
-    // 1. Initialize 3D Volumetric Space Particles
-    const starCount = 380;
+    // 1. Initialize 3D Volumetric Space Particles (Clean, crisp points without noisy blur)
+    const starCount = 190;
     const stars: { x: number; y: number; z: number; size: number; color: string }[] = [];
     const colors = ["#06b6d4", "#3b82f6", "#a855f7", "#f59e0b", "#ef4444"];
     for (let i = 0; i < starCount; i++) {
@@ -45,7 +45,7 @@ export default function CinematicBackground({ scrollProgress, activeLevel }: Cin
         x: (Math.random() - 0.5) * 2200,
         y: (Math.random() - 0.5) * 2200,
         z: Math.random() * 1600 + 1,
-        size: Math.random() * 2.2 + 0.5,
+        size: Math.random() * 1.8 + 0.5,
         color: colors[Math.floor(Math.random() * colors.length)],
       });
     }
@@ -157,8 +157,8 @@ export default function CinematicBackground({ scrollProgress, activeLevel }: Cin
 
     handleResize();
 
-    // 7. RequestAnimationFrame 60-120fps physics loop
-    const LERP_FACTOR = 0.12;
+    // 7. RequestAnimationFrame 60-120fps physics loop (Smooth, cinematic lerp factor)
+    const LERP_FACTOR = 0.085;
 
     const animate = () => {
       if (!isRunningRef.current) return;
@@ -192,7 +192,7 @@ export default function CinematicBackground({ scrollProgress, activeLevel }: Cin
         const stars = starsRef.current;
 
         // Warp speed scales dynamically with scroll velocity
-        const speed = 2.2 + Math.min(Math.abs(diff) * 3, 14);
+        const speed = 1.8 + Math.min(Math.abs(diff) * 2.2, 8);
 
         for (let i = 0; i < stars.length; i++) {
           const s = stars[i];
@@ -250,9 +250,9 @@ export default function CinematicBackground({ scrollProgress, activeLevel }: Cin
     };
   }, []);
 
-  // Map scrollProgress across all 63 frames (0.0 to 0.70 scrubs frames 1..63, then stays locked on frame 63)
+  // Map scrollProgress across all 63 frames (0.0 to 0.74 scrubs frames 1..63 smoothly)
   useEffect(() => {
-    const STORY_END_PROGRESS = 0.70;
+    const STORY_END_PROGRESS = 0.74;
     const clampedProgress = Math.min(1, Math.max(0, scrollProgress / STORY_END_PROGRESS));
     const target = clampedProgress * (TOTAL_FRAMES - 1);
     targetFrameRef.current = target;
@@ -267,43 +267,54 @@ export default function CinematicBackground({ scrollProgress, activeLevel }: Cin
       style={{ backgroundColor: "#0a0a0c" }}
       aria-hidden="true"
     >
-      {/* Layer 1: Frame sequence canvas (The Story) */}
+      {/* Layer 1: Frame sequence canvas with enhanced sharpness and contrast */}
       <canvas
         ref={frameCanvasRef}
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 transition-opacity duration-500"
-        style={{ opacity: storyOpacity }}
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          width: "100%",
+          height: "100%",
+          opacity: storyOpacity,
+          imageRendering: "-webkit-optimize-contrast",
+          filter: "contrast(1.08) brightness(1.04) saturate(1.06)",
+        }}
       />
 
-      {/* Layer 2: Deep 3D Warp Stars & Particles (The Security Facility) */}
+      {/* Layer 2: Deep 3D Warp Stars & Particles */}
       <canvas
         ref={particleCanvasRef}
-        className="absolute inset-0 w-full h-full object-cover pointer-events-none z-[1]"
+        className="absolute inset-0 pointer-events-none z-[1]"
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
       />
 
-      {/* Layer 3: High-contrast Volumetric Lighting Accents based on active level */}
+      {/* Layer 3: High-contrast Volumetric Lighting Accents with clear, crisp center */}
       <div
         className="absolute inset-0 pointer-events-none z-[2] transition-all duration-700"
         style={{
           background:
             activeLevel === 1
-              ? "radial-gradient(ellipse at 50% 50%, rgba(6, 182, 212, 0.16) 0%, rgba(10, 10, 12, 0.9) 75%)"
+              ? "radial-gradient(ellipse at 50% 45%, rgba(6, 182, 212, 0.12) 0%, rgba(10, 10, 12, 0.32) 68%, rgba(10, 10, 12, 0.8) 100%)"
               : activeLevel === 2
-              ? "radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.16) 0%, rgba(10, 10, 12, 0.9) 75%)"
+              ? "radial-gradient(ellipse at 50% 45%, rgba(168, 85, 247, 0.12) 0%, rgba(10, 10, 12, 0.32) 68%, rgba(10, 10, 12, 0.8) 100%)"
               : activeLevel === 3
-              ? "radial-gradient(ellipse at 50% 50%, rgba(245, 158, 11, 0.16) 0%, rgba(10, 10, 12, 0.9) 75%)"
+              ? "radial-gradient(ellipse at 50% 45%, rgba(245, 158, 11, 0.12) 0%, rgba(10, 10, 12, 0.32) 68%, rgba(10, 10, 12, 0.8) 100%)"
               : activeLevel === 4
-              ? "radial-gradient(ellipse at 50% 50%, rgba(239, 68, 68, 0.2) 0%, rgba(10, 10, 12, 0.9) 75%)"
-              : "radial-gradient(ellipse at 50% 50%, rgba(14, 165, 233, 0.08) 0%, rgba(10, 10, 12, 0.9) 75%)",
+              ? "radial-gradient(ellipse at 50% 45%, rgba(239, 68, 68, 0.15) 0%, rgba(10, 10, 12, 0.32) 68%, rgba(10, 10, 12, 0.8) 100%)"
+              : "radial-gradient(ellipse at 50% 45%, rgba(14, 165, 233, 0.08) 0%, rgba(10, 10, 12, 0.28) 68%, rgba(10, 10, 12, 0.8) 100%)",
         }}
       />
 
       {/* Layer 4: Cybernetic Grid Perspective Grid Floor with Volumetric Illumination */}
       <div
-        className="absolute inset-x-0 bottom-0 h-[450px] opacity-25 pointer-events-none z-[3]"
+        className="absolute inset-x-0 bottom-0 h-[450px] opacity-30 pointer-events-none z-[3]"
         style={{
-          backgroundImage: `linear-gradient(to right, rgba(6, 182, 212, 0.3) 1px, transparent 1px), linear-gradient(to bottom, rgba(6, 182, 212, 0.3) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(to right, rgba(6, 182, 212, 0.35) 1px, transparent 1px), linear-gradient(to bottom, rgba(6, 182, 212, 0.35) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
-          transform: "perspective(600px) rotateX(68deg) translateY(100px)",
+          transform: "perspective(600px) rotateX(68deg) translateY(100px) translateZ(0)",
+          backfaceVisibility: "hidden",
         }}
       />
     </div>
