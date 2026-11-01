@@ -1,0 +1,11 @@
+{
+  "name": "cyber-hunt-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix cyber_hunt",
+    "build": "npm run build --prefix cyber_hunt",
+    "start": "npm run start --prefix cyber_hunt"
+  }
+}
+
